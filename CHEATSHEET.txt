@@ -1,0 +1,35 @@
+# FISHTOPIA — QUICK REFERENCE CHEAT SHEET
+# ==========================================
+
+CONTROLS (in game)
+  WASD or Arrow Keys  →  Move player
+  E (tap)             →  Fish (near water) / Sell (near sell table)
+  E (hold 1.5s)       →  Enter shop (near shop arrow)
+
+SCREENS
+  Title  →  click PLAY
+  Game   →  main map
+  Shop   →  hold E near purple shop box, or click < Back to return
+
+FISH & COINS
+  Minnow      →   5 coins  (Common)
+  Bass        →  15 coins  (Uncommon)
+  Salmon      →  35 coins  (Rare)
+  Swordfish   →  75 coins  (Epic)
+  Golden Fish → 200 coins  (Legendary)
+
+UPGRADES (shop)
+  Better Rod   → improves rare fish chance  (75 coins)
+  Speed Boost  → player moves faster        (60 coins)
+  Better Luck  → shifts rarity rolls up     (80 coins)
+  More Money   → multiplies sell value      (70 coins)
+
+FILES IN THIS REPO
+  GAMELAB_MAIN.js   ← paste this into Code.org Game Lab
+  INSTRUCTIONS.txt  ← full setup guide, read first
+  CHEATSHEET.txt    ← this file
+
+ZONE LOCATIONS (on 400x400 canvas)
+  Water zone   →  top-left  (x:10, y:10, w:150, h:100)
+  Sell table   →  bot-left  (x:10, y:310, w:120, h:60)
+  Shop arrow   →  bot-right (x:260, y:310, w:120, h:60)

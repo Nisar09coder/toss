@@ -1,0 +1,195 @@
+# Fishtopia — Setup Instructions
+# ===============================
+# Read this top to bottom before touching anything.
+# Should take you about 10 minutes to get running.
+
+═══════════════════════════════════════════
+  STEP 1 — Open Code.org Game Lab
+═══════════════════════════════════════════
+
+1. Go to: https://studio.code.org
+2. Sign in to your account
+3. Click "Create Project"
+4. Choose "Game Lab" (NOT App Lab, NOT Sprite Lab)
+5. You'll see a blank code editor with a draw() function already there
+
+═══════════════════════════════════════════
+  STEP 2 — Paste the game code
+═══════════════════════════════════════════
+
+1. Open the file called:  GAMELAB_MAIN.js
+2. Select ALL the text in that file (Ctrl+A / Cmd+A)
+3. Copy it (Ctrl+C / Cmd+C)
+4. Go back to Code.org Game Lab
+5. Click inside the code editor
+6. Select ALL existing code (Ctrl+A) — delete the default draw() stub
+7. Paste your code (Ctrl+V)
+8. Press the green RUN button
+
+  ✅ You should see the title screen appear immediately.
+     Click PLAY to enter the game map.
+
+═══════════════════════════════════════════
+  STEP 3 — Test each feature
+═══════════════════════════════════════════
+
+Test these one by one:
+
+  [ ] Title screen shows and PLAY button works
+  [ ] Player moves with WASD and arrow keys
+  [ ] Walking to the blue WATER zone shows "[E] Cast fishing line"
+  [ ] Pressing E while near water starts fishing (1.5–3s wait)
+  [ ] After catching, a popup shows the fish name and rarity
+  [ ] A 5-second cooldown appears before you can fish again
+  [ ] Walking to SELL TABLE and pressing E sells all fish
+  [ ] Coins increase after selling
+  [ ] Walking to SHOP and holding E for 1.5s enters the shop screen
+  [ ] Clicking an upgrade in the shop deducts coins and raises the level
+  [ ] Clicking "< Back" returns to the game map
+
+═══════════════════════════════════════════
+  STEP 4 — Add your own sprites (optional)
+═══════════════════════════════════════════
+
+If you find Gimkit or custom sprites before tomorrow:
+
+  To replace the PLAYER rectangle:
+    1. Go to the Sprites panel (the image icon on the left sidebar)
+    2. Upload your player image
+    3. In GAMELAB_MAIN.js, find this section:
+         // ── PLAYER ──
+         drawRoundRect(player.x, ...)
+    4. Replace those lines with:
+         drawSprite(yourSpriteName, player.x, player.y)
+
+  To replace the BACKGROUND:
+    1. Upload a background image
+    2. Find:  background(rgb(140, 200, 240));
+    3. Replace with: background(yourBackgroundImage);
+
+  Code.org Game Lab sprite docs:
+    https://studio.code.org/docs/ide/gamelab/
+
+═══════════════════════════════════════════
+  STEP 5 — Save your project
+═══════════════════════════════════════════
+
+1. Click the project name at the top (usually "Untitled Project")
+2. Rename it to:  Fishtopia
+3. Code.org auto-saves, but click the share button to get a link
+4. Copy the link and save it somewhere safe (notes app, email yourself)
+
+═══════════════════════════════════════════
+  HOW THE CODE IS ORGANIZED
+═══════════════════════════════════════════
+
+The code is split into clear sections with comments.
+Here is what each section does:
+
+  GLOBAL STATE
+    → Variables that track game progress:
+      coins, inventory[], upgrades{}
+      These persist across all screens.
+
+  FISH TABLE
+    → The 5 fish types with name, coin value, rarity, and weight.
+      Higher weight = appears more often.
+      To add a 6th fish, copy a line and add it to fishTable[].
+
+  PLAYER
+    → x/y position and speed.
+      speed is modified by the Speed Boost upgrade.
+
+  ZONES
+    → The three interactive areas: water, sell table, shop entrance.
+      Each is a rectangle with x, y, w, h.
+      You can move zones by changing those numbers.
+
+  FISHING LOGIC  (inside updateGame)
+    → rollFish()  picks a random fish weighted by luck upgrade
+    → Fishing takes 1.5–3 seconds (random)
+    → 5 second cooldown after every catch
+
+  SELL LOGIC  (sellAll function)
+    → Adds up all fish coin values
+    → Multiplies by money upgrade level
+    → Clears inventory, adds to coins
+
+  SHOP
+    → 4 upgrades, each with 3 levels
+    → Clicking buy button checks you have enough coins
+    → Speed upgrade applies to player.speed immediately
+
+  SCREENS
+    → screen variable controls which screen is drawn:
+       "title"  →  drawTitle()
+       "game"   →  updateGame() + drawGame()
+       "shop"   →  drawShop()
+
+═══════════════════════════════════════════
+  TWEAKING VALUES
+═══════════════════════════════════════════
+
+Want to change things? Here are the easy knobs:
+
+  COOLDOWN length (default 5s):
+    Find:  var COOLDOWN_MS = 5000;
+    Change 5000 to any number (milliseconds)
+
+  HOLD TIME to enter shop (default 1.5s):
+    Find:  var HOLD_TIME = 1500;
+    Change to make it faster or slower
+
+  FISH rarity weights:
+    Find the fishTable array at the top.
+    Higher weight = more common. Lower = rarer.
+    All weights added together = total roll range.
+
+  UPGRADE costs:
+    Find the shopItems array.
+    Change the cost: value for each item.
+
+  PLAYER start position:
+    Find:  player.x = 180; player.y = 180;
+    (inside the PLAY button click handler)
+
+  ZONE positions:
+    Find:  var waterZone = { x: 10, y: 10, w: 150, h: 100 };
+    Change x/y/w/h to move or resize any zone.
+
+═══════════════════════════════════════════
+  COMMON ERRORS + FIXES
+═══════════════════════════════════════════
+
+  Error: "draw is not defined"
+    → You deleted the draw() function. Re-paste the full code.
+
+  Error: "randomNumber is not defined"
+    → You might be testing outside Game Lab.
+      This only works inside Code.org Game Lab.
+
+  Player won't move
+    → Make sure you clicked on the game canvas first
+      (click it once to give it keyboard focus)
+
+  E key does nothing
+    → Make sure your player (orange square) is overlapping
+      the blue water zone or brown sell table zone.
+      Walk right into the colored box.
+
+  Shop shows but clicking does nothing
+    → Check you have enough coins for the upgrade.
+      The button only works if coins >= cost.
+
+═══════════════════════════════════════════
+  WHAT TO BUILD NEXT (Stage 2)
+═══════════════════════════════════════════
+
+Once the game is running, here's what to add next session:
+
+  [ ] Inventory screen (press I to view caught fish list)
+  [ ] Fishing animation (bobber going up and down)
+  [ ] Different map zones (multiple water spots)
+  [ ] Fish sprites instead of text names
+  [ ] Sound effects using Code.org's playSound()
+  [ ] Save high score using Code.org's setKeyValue()
